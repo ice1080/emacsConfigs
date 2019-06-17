@@ -12,7 +12,9 @@
 (require 'sqlplus)
 ;; (require 'exec-path-from-shell)
 
-(exec-path-from-shell-initialize)
+(if (eq system-type 'darwin)
+    (exec-path-from-shell-initialize)
+)
 
 (find-file "~/Documents/Notes/DatabaseScripts.md")
 (find-file "~/Documents/Notes/GeneralNotes.md")
@@ -46,10 +48,13 @@
 ;; (when (memq window-system '(mac ns x))
 ;;   (exec-path-from-shell-initialize))
 
-;; Oracle:
-(exec-path-from-shell-copy-env "DYLD_LIBRARY_PATH")
-(exec-path-from-shell-copy-env "TNS_ADMIN")
-
+(if (eq system-type 'darwin)
+    ;; Oracle:
+    (
+     (exec-path-from-shell-copy-env "DYLD_LIBRARY_PATH")
+     (exec-path-from-shell-copy-env "TNS_ADMIN")
+    )
+)
 
 (defun sqlplus-x-connect (db user pwd)
  "Build a connection string and make a connection. The point must be in an org-mode table.
