@@ -50,7 +50,7 @@
 
 (if (eq system-type 'darwin)
     ;; Oracle:
-    (
+    (progn
      (exec-path-from-shell-copy-env "DYLD_LIBRARY_PATH")
      (exec-path-from-shell-copy-env "TNS_ADMIN")
     )
