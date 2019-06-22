@@ -5,6 +5,7 @@
 (package-initialize)
 
 (setq user-emacs-directory "~/src/emacsConfigs/.emacs.d/")
+(setq package-user-dir "~/src/emacsConfigs/.emacs.d/elpa")
 
 ;; location of personal elisp lib dir
 (add-to-list 'load-path "~/src/emacsConfigs/lisp")
