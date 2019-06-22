@@ -23,7 +23,7 @@
  '(custom-enabled-themes (quote (tsdh-dark)))
  '(package-selected-packages
    (quote
-    (auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode exec-path-from-shell))))
+    (auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -35,7 +35,6 @@
 (if (eq system-type 'darwin)
     (exec-path-from-shell-initialize)
 )
-
 (if (string-equal system-name "ICDT-MBPIH.local")
     (find-file "~/Documents/Notes/DatabaseScripts.md")
 )
