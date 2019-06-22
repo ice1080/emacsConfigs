@@ -16,8 +16,12 @@
     (exec-path-from-shell-initialize)
 )
 
-(find-file "~/Documents/Notes/DatabaseScripts.md")
-(find-file "~/Documents/Notes/GeneralNotes.md")
+(if (eq system-name 'ICDT-MBPIH.local)
+    (find-file "~/Documents/Notes/DatabaseScripts.md")
+)
+(if (eq system-name 'ICDT-MBPIH.local)
+    (find-file "~/Documents/Notes/GeneralNotes.md")
+)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
