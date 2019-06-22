@@ -4,6 +4,8 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
+(setq user-emacs-directory "~/src/emacsConfigs/.emacs.d/")
+
 ;; location of personal elisp lib dir
 (add-to-list 'load-path "~/src/emacsConfigs/lisp")
 
