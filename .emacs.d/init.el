@@ -12,20 +12,8 @@
 (add-to-list 'load-path "~/src/emacsConfigs/lisp")
 
 ;; load the packages
-;; (require "~/src/emacsConfigs/lisp/sqlplus.el")
 (require 'sqlplus)
-;; (require 'exec-path-from-shell)
-
-(if (eq system-type 'darwin)
-    (exec-path-from-shell-initialize)
-)
-
-(if (eq system-name 'ICDT-MBPIH.local)
-    (find-file "~/Documents/Notes/DatabaseScripts.md")
-)
-(if (eq system-name 'ICDT-MBPIH.local)
-    (find-file "~/Documents/Notes/GeneralNotes.md")
-)
+(require 'exec-path-from-shell)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -43,6 +31,17 @@
  ;; If there is more than one, they won't work right.
  )
 (put 'upcase-region 'disabled nil)
+
+(if (eq system-type 'darwin)
+    (exec-path-from-shell-initialize)
+)
+
+(if (string-equal system-name "ICDT-MBPIH.local")
+    (find-file "~/Documents/Notes/DatabaseScripts.md")
+)
+(if (string-equal system-name "ICDT-MBPIH.local")
+    (find-file "~/Documents/Notes/GeneralNotes.md")
+)
 
 (setq-default indent-tabs-mode nil
               tab-width 4
