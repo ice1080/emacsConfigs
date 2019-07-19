@@ -2,11 +2,11 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(package-initialize)
 
 (setq user-init-file "~/src/emacsConfigs/.emacs.d/init.el")
 (setq user-emacs-directory "~/src/emacsConfigs/.emacs.d/")
-(setq package-user-dir "~/src/emacsConfigs/.emacs.d/elpa")
+(setq package-user-dir "~/src/emacsConfigs/.emacs.d/elpa/")
+(package-initialize)
 
 ;; location of personal elisp lib dir
 (add-to-list 'load-path "~/src/emacsConfigs/lisp")
