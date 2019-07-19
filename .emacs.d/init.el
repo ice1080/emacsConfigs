@@ -46,6 +46,7 @@
               tab-width 4
 			  display-line-numbers t)
 (setq confirm-kill-emacs 'y-or-n-p)
+(setq visible-bell 1)
 
 ;; (global-display-line-numbers-mode)
 
