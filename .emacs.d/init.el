@@ -11,6 +11,7 @@
 ;; location of personal elisp lib dir
 (add-to-list 'load-path "~/src/emacsConfigs/lisp")
 
+;; todo move these back to with the other elpa packages
 ;; load the packages
 (require 'sqlplus)
 (require 'exec-path-from-shell)
@@ -23,7 +24,7 @@
  '(custom-enabled-themes (quote (tsdh-dark)))
  '(package-selected-packages
    (quote
-    (auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
+    (projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -31,6 +32,11 @@
  ;; If there is more than one, they won't work right.
  )
 (put 'upcase-region 'disabled nil)
+(setq js-indent-level 2)
+
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
+(setq projectile-project-search-path '("~/src/"))
 
 (if (eq system-type 'darwin)
     (exec-path-from-shell-initialize)
