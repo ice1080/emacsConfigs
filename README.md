@@ -1,2 +1,2 @@
 # emacsConfigs
-Configuration Files for Emacs
+Personal Configuration Files for Emacs
