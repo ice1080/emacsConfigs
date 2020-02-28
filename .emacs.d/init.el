@@ -54,6 +54,8 @@
 (setq confirm-kill-emacs 'y-or-n-p)
 (setq visible-bell 1)
 
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-jsx-mode))
+
 ;; (global-display-line-numbers-mode)
 
 ;; (set-keyboard-coding-system nil)
