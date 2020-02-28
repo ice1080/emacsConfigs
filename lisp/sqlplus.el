@@ -2758,14 +2758,14 @@ create output buffer but dont show it, DONT-CREATE-OUTPUT-BUFFER
         (when (or (equal plsql-font-lock-level t) (equal sqlplus-font-lock-level t)
                   (and (numberp plsql-font-lock-level) (>= plsql-font-lock-level 2))
                   (and (numberp sqlplus-font-lock-level) (>= sqlplus-font-lock-level 2)))
-          (sqlplus-hidden-select connect-string 
-                                 (concat "select distinct column_name, 'COLUMN', ' ' from user_tab_columns where column_name not like 'BIN$%'\n"
-                                         "union\n"
-                                         "select username, 'SCHEMA', ' ' from all_users where username not like 'BIN$%'\n"
-                                         "union\n"
-                                         "select object_name, object_type, decode( status, 'INVALID', 'I', ' ' ) from user_objects\n"
-                                         "where object_name not like 'BIN$%'\n"
-					 "and object_type in ('VIEW', 'SEQUENCE', 'PACKAGE', 'TRIGGER', 'TABLE', 'SYNONYM', 'INDEX', 'FUNCTION', 'PROCEDURE');")
+          (sqlplus-hidden-select connect-string ""
+                     ;;             (concat "select distinct column_name, 'COLUMN', ' ' from user_tab_columns where column_name not like 'BIN$%'\n"
+                     ;;                     "union\n"
+                     ;;                     "select username, 'SCHEMA', ' ' from all_users where username not like 'BIN$%'\n"
+                     ;;                     "union\n"
+                     ;;                     "select object_name, object_type, decode( status, 'INVALID', 'I', ' ' ) from user_objects\n"
+                     ;;                     "where object_name not like 'BIN$%'\n"
+					 ;; "and object_type in ('VIEW', 'SEQUENCE', 'PACKAGE', 'TRIGGER', 'TABLE', 'SYNONYM', 'INDEX', 'FUNCTION', 'PROCEDURE');")
                                  'sqlplus-my-handler))))
     (when input-buffer
       (save-selected-window
