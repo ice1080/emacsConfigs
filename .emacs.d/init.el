@@ -56,6 +56,10 @@
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-jsx-mode))
 
+(define-globalized-minor-mode my-global-ac-mode auto-complete-mode
+  (lambda () (auto-complete-mode 1)))
+(my-global-ac-mode 1)
+
 ;; (global-display-line-numbers-mode)
 
 ;; (set-keyboard-coding-system nil)
