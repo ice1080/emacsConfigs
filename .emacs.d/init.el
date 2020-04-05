@@ -37,6 +37,7 @@
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
 (setq projectile-project-search-path '("~/src/"))
+(add-to-list 'projectile-globally-ignored-directories "node_modules")
 
 (if (eq system-type 'darwin)
     (exec-path-from-shell-initialize)
