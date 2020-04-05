@@ -2,6 +2,6 @@
 ac-comphist.dat
 auto-save-list/
 projectile-bookmarks.eld
-projectile.*
+# projectile.*
 .emacs.d/session*
 *~
