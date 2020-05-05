@@ -50,10 +50,10 @@
 
 ;; open files
 (if (string-equal system-name "ICDT-MBPIH.local")
-    (find-file "~/Documents/Notes/DatabaseScripts.md")
+    (find-file "~/OneDrive - ICD Tech/Notes/DatabaseScripts.md")
 )
 (if (string-equal system-name "ICDT-MBPIH.local")
-    (find-file "~/Documents/Notes/GeneralNotes.md")
+    (find-file "~/OneDrive - ICD Tech/Notes/GeneralNotes.md")
 )
 
 ;; various emacs configs
