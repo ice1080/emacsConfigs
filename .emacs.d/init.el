@@ -55,6 +55,12 @@
 (if (string-equal system-name "ICDT-MBPIH.local")
     (find-file "~/OneDrive - ICD Tech/Notes/GeneralNotes.md")
 )
+(if (string-equal system-name "ICDT-WKIH")
+    (find-file "~/OneDrive/Notes/DatabaseScripts.md")
+)
+(if (string-equal system-name "ICDT-WKIH")
+    (find-file "~/OneDrive/Notes/GeneralNotes.md")
+)
 
 ;; various emacs configs
 (setq-default indent-tabs-mode nil
