@@ -24,7 +24,7 @@
  '(custom-enabled-themes (quote (tsdh-dark)))
  '(package-selected-packages
    (quote
-    (neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
+    (org-bullets neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -33,6 +33,10 @@
  )
 (put 'upcase-region 'disabled nil)
 
+
+;; org mode
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(setq org-log-done 'time)
 
 ;; projectile settings
 (projectile-mode +1)
@@ -44,7 +48,7 @@
 (global-set-key [f8] 'neotree-toggle)
 
 ;; shell path initialization
-(if (eq system-type 'darwin)
+(if (or (eq system-type 'darwin) (string-equal system-name "ICDT-WKIH"))
     (exec-path-from-shell-initialize)
   )
 
@@ -89,10 +93,18 @@
 (if (eq system-type 'darwin)
     ;; Oracle:
     (progn
-     (exec-path-from-shell-copy-env "DYLD_LIBRARY_PATH")
-     (exec-path-from-shell-copy-env "TNS_ADMIN")
-    )
-)
+      (exec-path-from-shell-copy-env "DYLD_LIBRARY_PATH")
+      (exec-path-from-shell-copy-env "TNS_ADMIN")
+      )
+  )
+
+(if (string-equal system-name "ICDT-WKIH")
+    ;; Oracle:
+    (progn
+      (exec-path-from-shell-copy-env "LD_LIBRARY_PATH")
+      (exec-path-from-shell-copy-env "TNS_ADMIN")
+      )
+  )
 
 ;; sqlplus stuff
 (defun sqlplus-x-connect (db user pwd)

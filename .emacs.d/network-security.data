@@ -1,0 +1,3 @@
+(
+ (:id "sha1:766f04859b4332aac8d7b0a43d6a29a3be108753" :fingerprint "sha1:bc:1e:b0:83:d4:44:27:ea:58:09:f8:4d:55:7c:fb:e1:f8:02:b0:1d" :host "portal-ihudson.icdt.net:443" :conditions (:self-signed :unknown-ca :invalid))
+)
