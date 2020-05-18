@@ -54,16 +54,16 @@
 
 ;; open files
 (if (string-equal system-name "ICDT-MBPIH.local")
-    (find-file "~/OneDrive - ICD Tech/Notes/DatabaseScripts.md")
+    (find-file "~/OneDrive - ICD Tech/Notes/DatabaseScripts.org")
 )
 (if (string-equal system-name "ICDT-MBPIH.local")
-    (find-file "~/OneDrive - ICD Tech/Notes/GeneralNotes.md")
+    (find-file "~/OneDrive - ICD Tech/Notes/GeneralNotes.org")
 )
 (if (string-equal system-name "ICDT-WKIH")
-    (find-file "~/OneDrive/Notes/DatabaseScripts.md")
+    (find-file "~/OneDrive/Notes/DatabaseScripts.org")
 )
 (if (string-equal system-name "ICDT-WKIH")
-    (find-file "~/OneDrive/Notes/GeneralNotes.md")
+    (find-file "~/OneDrive/Notes/GeneralNotes.org")
 )
 
 ;; various emacs configs
