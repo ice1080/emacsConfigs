@@ -1,5 +1,7 @@
 (package-initialize)
 
+;; to reload this file, use M-x load-file RET RET
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
