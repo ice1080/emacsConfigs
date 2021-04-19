@@ -24,6 +24,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes (quote (tsdh-dark)))
+ '(org-archive-default-command (quote org-archive-subtree))
  '(package-selected-packages
    (quote
     (org-bullets neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
