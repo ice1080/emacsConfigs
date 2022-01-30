@@ -46,6 +46,7 @@
 (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
 (setq projectile-project-search-path '("~/src/"))
 (add-to-list 'projectile-globally-ignored-directories "node_modules")
+(projectile-discover-projects-in-search-path)
 
 ;; neotree
 (global-set-key [f8] 'neotree-toggle)
