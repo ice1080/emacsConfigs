@@ -86,6 +86,12 @@
   (lambda () (auto-complete-mode 1)))
 (my-global-ac-mode 1)
 
+;; revert buffers when the underlying file has changed
+(global-auto-revert-mode 1)
+
+;; revert dired and other buffers
+(setq global-auto-revert-non-file-buffers t)
+
 ;; (global-display-line-numbers-mode)
 
 ;; (set-keyboard-coding-system nil)
