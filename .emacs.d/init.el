@@ -56,7 +56,10 @@
     (exec-path-from-shell-initialize)
   )
 
-;; open files
+;; shell don't delete command prompt
+(setq comint-prompt-read-only t)
+
+;; open files on startup
 (if (string-equal system-name "ICDT-MBPIH.local")
     (find-file "~/OneDrive - ICD Tech/Notes/DatabaseScripts.org")
 )
