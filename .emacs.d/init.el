@@ -36,6 +36,8 @@
  )
 (put 'upcase-region 'disabled nil)
 
+;; turn off start screen
+(setq inhibit-startup-screen t)
 
 ;; org mode
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
@@ -56,10 +58,19 @@
     (exec-path-from-shell-initialize)
   )
 
-;; shell don't delete command prompt
+;; shell command prompt customizations
 (setq comint-prompt-read-only t)
+;; TODO for clearing the buffer: https://stackoverflow.com/questions/7733668/command-to-clear-shell-while-using-emacs-shell
+;; would have to use their function, and then also add in setting the comint prompt to not read only, then clear, then set to read only...
+;; this is for different shell, but could possibly use the function https://emacs.stackexchange.com/questions/12503/how-to-clear-the-eshell#:~:text=There%20is%20a%20function%20in,the%20emacs%2Ddevel%20mailing%20list.&text=Typing%20clear%20in%20eshell%20will%20then%20result%20in%20clearing%20the%20buffer.
+
+;; TODO need to also turn off autocomplete in shell, so that it doesn't get in the way of the tab-completion in the shell
+
+;; TODO need to figure out coloring in the shell
 
 ;; open files on startup
+(find-file "~/src/emacsConfigs/.emacs.d/init.el")
+
 (if (string-equal system-name "ICDT-MBPIH.local")
     (find-file "~/OneDrive - ICD Tech/Notes/DatabaseScripts.org")
 )
@@ -79,6 +90,8 @@
 			  display-line-numbers t)
 (setq confirm-kill-emacs 'y-or-n-p)
 (setq visible-bell 1)
+
+(split-window-right)
 
 ;; js settings, ie enable jsx mode for all js files
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-jsx-mode))
