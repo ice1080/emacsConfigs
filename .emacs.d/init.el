@@ -25,7 +25,7 @@
  '(org-archive-default-command (quote org-archive-subtree))
  '(package-selected-packages
    (quote
-    (exec-path-from-shell rust-mode org-bullets neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
+    (which-key exec-path-from-shell rust-mode org-bullets neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -42,6 +42,7 @@
 (setq org-log-done 'time)
 
 ;; projectile settings
+(require 'subr-x) ;; necessary because of this issue: https://github.com/bbatsov/projectile/issues/1382
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
 (setq projectile-project-search-path '("~/src"))
@@ -75,7 +76,7 @@
 
 ;; TODO need to figure out coloring in the shell
 
-;; open files on startup
+;; startup commands:
 (find-file "~/src/emacsConfigs/.emacs.d/init.el")
 
 (if (string-equal system-name "ICDT-MBPIH.local")
@@ -90,15 +91,22 @@
 (if (string-equal system-name "ICDT-WKIH")
     (find-file "~/OneDrive/Notes/GeneralNotes.org")
 )
+(split-window-right)
 
 ;; various emacs configs
 (setq-default indent-tabs-mode nil
               tab-width 4
 			  display-line-numbers t)
+(column-number-mode)
 (setq confirm-kill-emacs 'y-or-n-p)
 (setq visible-bell 1)
 
-(split-window-right)
+(use-package which-key
+  :init
+  (setq which-key-idle-delay 0)
+  (which-key-mode)
+  :diminish which-key-mode)
+  
 
 ;; js settings, ie enable jsx mode for all js files
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-jsx-mode))
