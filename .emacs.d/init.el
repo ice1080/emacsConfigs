@@ -25,7 +25,7 @@
  '(org-archive-default-command (quote org-archive-subtree))
  '(package-selected-packages
    (quote
-    (which-key exec-path-from-shell rust-mode org-bullets neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
+    (ivy-rich counsel which-key exec-path-from-shell rust-mode org-bullets neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -34,8 +34,42 @@
  )
 (put 'upcase-region 'disabled nil)
 
-;; turn off start screen
+;; various emacs configs
+(setq-default indent-tabs-mode nil
+              tab-width 4
+			  display-line-numbers t)
+(column-number-mode)
+(setq confirm-kill-emacs 'y-or-n-p)
+(setq visible-bell 1)
+(tool-bar-mode -1)
+(set-fringe-mode 10)
 (setq inhibit-startup-screen t)
+
+(use-package which-key
+  :init
+  (setq which-key-idle-delay 0.3)
+  (which-key-mode)
+  :diminish which-key-mode)
+
+(use-package ivy
+  :bind (("C-s" . swiper))
+  :config
+  (ivy-mode 1)
+  :diminish ivy-mode)
+
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1)
+  :diminish ivy-rich-mode)
+
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+         ("C-x b" . counsel-ibuffer)
+         ("C-x C-f" . counsel-find-file)
+         :map minibuffer-local-map
+         ("C-r" . 'counsel-minibuffer-history))
+  :config
+  (setq ivy-initial-inputs-alist nil))
 
 ;; org mode
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
@@ -93,21 +127,6 @@
 )
 (split-window-right)
 
-;; various emacs configs
-(setq-default indent-tabs-mode nil
-              tab-width 4
-			  display-line-numbers t)
-(column-number-mode)
-(setq confirm-kill-emacs 'y-or-n-p)
-(setq visible-bell 1)
-
-(use-package which-key
-  :init
-  (setq which-key-idle-delay 0)
-  (which-key-mode)
-  :diminish which-key-mode)
-  
-
 ;; js settings, ie enable jsx mode for all js files
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-jsx-mode))
 (setq js-indent-level 4)
@@ -117,7 +136,7 @@
   (lambda () (auto-complete-mode 1)))
 (my-global-ac-mode 1)
 
-;; revert buffers when the underlying file has changed
+;; revert(reload) buffers when the underlying file has changed
 (global-auto-revert-mode 1)
 
 ;; revert dired and other buffers
