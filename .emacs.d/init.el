@@ -44,9 +44,18 @@
 ;; projectile settings
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
-(setq projectile-project-search-path '("~/src/"))
+(setq projectile-project-search-path '("~/src"))
 (add-to-list 'projectile-globally-ignored-directories "node_modules")
 (projectile-discover-projects-in-search-path)
+(setq projectile-completion-system 'ido)
+
+;; use ido auto completion everywhere
+(use-package ido
+  :config
+  (setq ido-enable-flex-matching t)
+  (ido-mode 1)
+  ;; (ido-ubiquitous-mode 1)
+  )
 
 ;; neotree
 (global-set-key [f8] 'neotree-toggle)
