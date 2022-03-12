@@ -95,7 +95,7 @@
 
 ;; js settings, ie enable jsx mode for all js files
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-jsx-mode))
-(setq js-indent-level 2)
+(setq js-indent-level 4)
 
 ;; turn on auto-complete mode all the time
 (define-globalized-minor-mode my-global-ac-mode auto-complete-mode
