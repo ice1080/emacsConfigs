@@ -13,10 +13,8 @@
 ;; location of personal elisp lib dir
 (add-to-list 'load-path "~/src/emacsConfigs/lisp")
 
-;; todo move these back to with the other elpa packages
-;; load the packages
+;; load the local packages
 (require 'sqlplus)
-(require 'exec-path-from-shell)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -27,7 +25,7 @@
  '(org-archive-default-command (quote org-archive-subtree))
  '(package-selected-packages
    (quote
-    (rust-mode org-bullets neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
+    (exec-path-from-shell rust-mode org-bullets neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
