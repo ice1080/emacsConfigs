@@ -25,7 +25,7 @@
  '(org-archive-default-command (quote org-archive-subtree))
  '(package-selected-packages
    (quote
-    (ivy-rich counsel which-key exec-path-from-shell rust-mode org-bullets neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
+    (prettier web-mode flycheck ivy-rich counsel which-key exec-path-from-shell rust-mode org-bullets neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -83,7 +83,7 @@
 (setq projectile-project-search-path '("~/src"))
 (add-to-list 'projectile-globally-ignored-directories "node_modules")
 (projectile-discover-projects-in-search-path)
-(setq projectile-completion-system 'ido)
+(setq projectile-completion-system 'ido) ;; todo should this be changed to ivy?
 
 ;; use ido auto completion everywhere
 (use-package ido
@@ -91,10 +91,51 @@
   (setq ido-enable-flex-matching t)
   (ido-mode 1)
   ;; (ido-ubiquitous-mode 1)
+  ;; todo is this needed now that we're using ivy?
   )
 
-;; neotree
+;; neotree configs
 (global-set-key [f8] 'neotree-toggle)
+
+;; js settings, ie enable jsx mode for all js files
+(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+(setq js-indent-level 4)
+
+;; prettier mode based on minor modes
+(add-hook 'after-init-hook #'global-prettier-mode)
+
+;; flycheck configs: http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
+(use-package flycheck
+  :init (global-flycheck-mode))
+;; disable jshint since we prefer eslint checking
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint)))
+;; use eslint with web-mode for jsx files
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+;; ;; customize flycheck temp file prefix
+;; (setq-default flycheck-temp-prefix ".flycheck")
+;; ;; disable json-jsonlist checking for json files
+;; (setq-default flycheck-disabled-checkers
+;;   (append flycheck-disabled-checkers
+;;     '(json-jsonlist)))
+;; ;; use local eslint from node_modules before global
+;; ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
+;; (defun my/use-eslint-from-node-modules ()
+;;   (let* ((root (locate-dominating-file
+;;                 (or (buffer-file-name) default-directory)
+;;                 "node_modules"))
+;;          (eslint (and root
+;;                       (expand-file-name "node_modules/eslint/bin/eslint.js"
+;;                                         root))))
+;;     (when (and eslint (file-executable-p eslint))
+;;       (setq-local flycheck-javascript-eslint-executable eslint))))
+;; (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+
+;; turn on auto-complete mode all the time
+(define-globalized-minor-mode my-global-ac-mode auto-complete-mode
+  (lambda () (auto-complete-mode 1)))
+(my-global-ac-mode 1)
 
 ;; shell path initialization
 (if (or (eq system-type 'darwin) (string-equal system-name "ICDT-WKIH"))
@@ -127,15 +168,6 @@
     (find-file "~/OneDrive/Notes/GeneralNotes.org")
 )
 (split-window-right)
-
-;; js settings, ie enable jsx mode for all js files
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-jsx-mode))
-(setq js-indent-level 4)
-
-;; turn on auto-complete mode all the time
-(define-globalized-minor-mode my-global-ac-mode auto-complete-mode
-  (lambda () (auto-complete-mode 1)))
-(my-global-ac-mode 1)
 
 ;; revert(reload) buffers when the underlying file has changed
 (global-auto-revert-mode 1)
