@@ -83,16 +83,7 @@
 (setq projectile-project-search-path '("~/src"))
 (add-to-list 'projectile-globally-ignored-directories "node_modules")
 (projectile-discover-projects-in-search-path)
-(setq projectile-completion-system 'ido) ;; todo should this be changed to ivy?
-
-;; use ido auto completion everywhere
-(use-package ido
-  :config
-  (setq ido-enable-flex-matching t)
-  (ido-mode 1)
-  ;; (ido-ubiquitous-mode 1)
-  ;; todo is this needed now that we're using ivy?
-  )
+(setq projectile-completion-system 'ivy)
 
 ;; neotree configs
 (global-set-key [f8] 'neotree-toggle)
