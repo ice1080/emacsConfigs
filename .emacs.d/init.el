@@ -52,7 +52,8 @@
   :diminish which-key-mode)
 
 (use-package ivy
-  :bind (("C-s" . swiper))
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper-backward))
   :config
   (ivy-mode 1)
   :diminish ivy-mode)
@@ -98,10 +99,10 @@
 ;; flycheck configs: http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
 (use-package flycheck
   :init (global-flycheck-mode))
-;; disable jshint since we prefer eslint checking
-(setq-default flycheck-disabled-checkers
-              (append flycheck-disabled-checkers
-                      '(javascript-jshint)))
+;; ;; disable jshint since we prefer eslint checking
+;; (setq-default flycheck-disabled-checkers
+;;               (append flycheck-disabled-checkers
+;;                       '(javascript-jshint)))
 ;; use eslint with web-mode for jsx files
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 ;; ;; customize flycheck temp file prefix
@@ -124,14 +125,10 @@
 ;; (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
 ;; turn on auto-complete mode all the time
+;; todo eventually remove this or replace with ivy in places
 (define-globalized-minor-mode my-global-ac-mode auto-complete-mode
   (lambda () (auto-complete-mode 1)))
 (my-global-ac-mode 1)
-
-;; shell path initialization
-(if (or (eq system-type 'darwin) (string-equal system-name "ICDT-WKIH"))
-    (exec-path-from-shell-initialize)
-  )
 
 ;; shell command prompt customizations
 (setq comint-prompt-read-only t)
@@ -171,8 +168,8 @@
 ;; (set-keyboard-coding-system nil)
 
 ;; If linux or mac, prepare exec-path package
-;; (when (memq window-system '(mac ns x))
-;;   (exec-path-from-shell-initialize))
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 
 (if (eq system-type 'darwin)
     ;; Oracle:
