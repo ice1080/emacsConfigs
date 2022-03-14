@@ -99,33 +99,11 @@
 ;; flycheck configs: http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
 (use-package flycheck
   :init (global-flycheck-mode))
-;; ;; disable jshint since we prefer eslint checking
-;; (setq-default flycheck-disabled-checkers
-;;               (append flycheck-disabled-checkers
-;;                       '(javascript-jshint)))
 ;; use eslint with web-mode for jsx files
 (flycheck-add-mode 'javascript-eslint 'web-mode)
-;; ;; customize flycheck temp file prefix
-;; (setq-default flycheck-temp-prefix ".flycheck")
-;; ;; disable json-jsonlist checking for json files
-;; (setq-default flycheck-disabled-checkers
-;;   (append flycheck-disabled-checkers
-;;     '(json-jsonlist)))
-;; ;; use local eslint from node_modules before global
-;; ;; http://emacs.stackexchange.com/questions/21205/flycheck-with-file-relative-eslint-executable
-;; (defun my/use-eslint-from-node-modules ()
-;;   (let* ((root (locate-dominating-file
-;;                 (or (buffer-file-name) default-directory)
-;;                 "node_modules"))
-;;          (eslint (and root
-;;                       (expand-file-name "node_modules/eslint/bin/eslint.js"
-;;                                         root))))
-;;     (when (and eslint (file-executable-p eslint))
-;;       (setq-local flycheck-javascript-eslint-executable eslint))))
-;; (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 
 ;; turn on auto-complete mode all the time
-;; todo eventually remove this or replace with ivy in places
+;; TODO eventually remove this or replace with ivy in places
 (define-globalized-minor-mode my-global-ac-mode auto-complete-mode
   (lambda () (auto-complete-mode 1)))
 (my-global-ac-mode 1)
@@ -136,7 +114,7 @@
 ;; would have to use their function, and then also add in setting the comint prompt to not read only, then clear, then set to read only...
 ;; this is for different shell, but could possibly use the function https://emacs.stackexchange.com/questions/12503/how-to-clear-the-eshell#:~:text=There%20is%20a%20function%20in,the%20emacs%2Ddevel%20mailing%20list.&text=Typing%20clear%20in%20eshell%20will%20then%20result%20in%20clearing%20the%20buffer.
 
-;; TODO need to also turn off autocomplete in shell, so that it doesn't get in the way of the tab-completion in the shell
+;; TODO need to also turn off autocomplete in shell, so that it doesn't get in the way of the tab-completion in the shell (or just disable autocomplete altogether)
 
 ;; TODO need to figure out coloring in the shell
 
