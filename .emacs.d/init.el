@@ -102,21 +102,11 @@
 ;; use eslint with web-mode for jsx files
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 
-;; turn on auto-complete mode all the time
-;; TODO eventually remove this or replace with ivy in places
-(define-globalized-minor-mode my-global-ac-mode auto-complete-mode
-  (lambda () (auto-complete-mode 1)))
-(my-global-ac-mode 1)
+;; auto complete
+(ac-config-default)
+;; TODO diminish the mode from mode line
 
-;; shell command prompt customizations
-(setq comint-prompt-read-only t)
-;; TODO for clearing the buffer: https://stackoverflow.com/questions/7733668/command-to-clear-shell-while-using-emacs-shell
-;; would have to use their function, and then also add in setting the comint prompt to not read only, then clear, then set to read only...
-;; this is for different shell, but could possibly use the function https://emacs.stackexchange.com/questions/12503/how-to-clear-the-eshell#:~:text=There%20is%20a%20function%20in,the%20emacs%2Ddevel%20mailing%20list.&text=Typing%20clear%20in%20eshell%20will%20then%20result%20in%20clearing%20the%20buffer.
-
-;; TODO need to also turn off autocomplete in shell, so that it doesn't get in the way of the tab-completion in the shell (or just disable autocomplete altogether)
-
-;; TODO need to figure out coloring in the shell
+;; TODO stop using term and try out vterm instead
 
 ;; startup commands:
 (find-file "~/src/emacsConfigs/.emacs.d/init.el")
