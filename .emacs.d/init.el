@@ -25,7 +25,7 @@
  '(org-archive-default-command (quote org-archive-subtree))
  '(package-selected-packages
    (quote
-    (prettier web-mode flycheck ivy-rich counsel which-key exec-path-from-shell rust-mode org-bullets neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
+    (vterm prettier web-mode flycheck ivy-rich counsel which-key exec-path-from-shell rust-mode org-bullets neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -105,8 +105,6 @@
 ;; auto complete
 (ac-config-default)
 ;; TODO diminish the mode from mode line
-
-;; TODO stop using term and try out vterm instead
 
 ;; startup commands:
 (find-file "~/src/emacsConfigs/.emacs.d/init.el")
