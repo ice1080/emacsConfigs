@@ -92,6 +92,7 @@
 
 ;; js settings, ie enable jsx mode for all js files
 (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 (setq js-indent-level 4)
 
 ;; prettier mode based on minor modes
