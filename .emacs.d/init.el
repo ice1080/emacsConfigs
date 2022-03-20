@@ -76,6 +76,7 @@
 ;; org mode
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 (setq org-log-done 'time)
+(setq org-ellipsis " ▾")
 
 ;; projectile settings
 (require 'subr-x) ;; necessary because of this issue: https://github.com/bbatsov/projectile/issues/1382
