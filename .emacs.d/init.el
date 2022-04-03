@@ -12,7 +12,7 @@
  custom-file (concat user-emacs-directory "custom.el")
  confirm-kill-emacs 'y-or-n-p
  visible-bell t
-;  use-package-always-ensure t ;; todo this needs testing
+ use-package-always-ensure t ;; todo this needs testing
  inhibit-startup-screen t
  global-auto-revert-non-file-buffers t)
 
@@ -37,6 +37,8 @@
 
 ;; location of personal elisp lib dir, for downloaded lisp files
 (add-to-list 'load-path "~/src/emacsConfigs/lisp")
+
+(use-package diminish)
 
 (use-package which-key
   :init
@@ -111,6 +113,11 @@
   :diminish auto-complete-mode
   :config
   (ac-config-default))
+
+;; (use-package doom-themes
+;;   :config
+;;   (load-theme doom-gruvbox))
+;;   (load-theme doom-peacock))
 
 ;; startup commands:
 (find-file (concat user-emacs-directory "init.el"))

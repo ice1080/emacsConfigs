@@ -5,7 +5,8 @@
 ;; Author: Peter Karpiuk <piotr.karpiuk (at) gmail (dot) com>
 ;; Maintainer: Peter Karpiuk <piotr.karpiuk (at) gmail (dot) com>
 ;; Created: 25 Nov 2007
-;; Version 0.9.1
+;; Updated: 8 Mar 2021
+;; Version 0.9.2
 ;; Keywords: sql sqlplus oracle plsql
 
 ;; GNU Emacs is free software; you can redistribute it and/or modify
@@ -2725,7 +2726,7 @@ create output buffer but dont show it, DONT-CREATE-OUTPUT-BUFFER
 								     (erase-buffer)))
 								 (when err-msg
 								   (insert (concat "\n" err-msg)))))))))
-			(process-kill-without-query proc (not sqlplus-kill-processes-without-query-on-exit-flag))
+			(set-process-query-on-exit-flag proc (not sqlplus-kill-processes-without-query-on-exit-flag))
 			(set-process-filter proc 'sqlplus-process-filter)
 			(with-current-buffer (get-buffer process-buffer-name)
 			  (setq sqlplus-process-p connect-string))
