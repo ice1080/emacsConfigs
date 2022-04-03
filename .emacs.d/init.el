@@ -1,49 +1,44 @@
-(package-initialize)
-
 ;; to reload this file, use M-x load-file RET RET
 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/"))
 
-(setq user-init-file "~/src/emacsConfigs/.emacs.d/init.el")
-(setq user-emacs-directory "~/src/emacsConfigs/.emacs.d/")
-(setq package-user-dir "~/src/emacsConfigs/.emacs.d/elpa/")
+;; various emacs configs
+(setq
+ user-emacs-directory "~/src/emacsConfigs/.emacs.d/"
+ user-init-file (concat user-emacs-directory "init.el")
+ package-user-dir (concat user-emacs-directory "elpa/")
+ custom-file (concat user-emacs-directory "custom.el")
+ confirm-kill-emacs 'y-or-n-p
+ visible-bell t
+;  use-package-always-ensure t ;; todo this needs testing
+ inhibit-startup-screen t)
+
+(setq-default indent-tabs-mode nil
+              tab-width 4
+	          display-line-numbers t)
+
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
+(column-number-mode)
+(tool-bar-mode -1)
+(set-fringe-mode 10)
+
+;; location of variables used by Custom
+(load custom-file)
 (package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
 
-;; location of personal elisp lib dir
+;; location of personal elisp lib dir, for downloaded lisp files
 (add-to-list 'load-path "~/src/emacsConfigs/lisp")
 
 ;; load the local packages
 (require 'sqlplus)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (tsdh-dark)))
- '(org-archive-default-command (quote org-archive-subtree))
- '(package-selected-packages
-   (quote
-    (vterm prettier web-mode flycheck ivy-rich counsel which-key exec-path-from-shell rust-mode org-bullets neotree projectile auto-complete rjsx-mode langtool magit-popup kubernetes restclient groovy-mode))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(put 'upcase-region 'disabled nil)
-
-;; various emacs configs
-(setq-default indent-tabs-mode nil
-              tab-width 4
-			  display-line-numbers t)
-(column-number-mode)
-(setq confirm-kill-emacs 'y-or-n-p)
-(setq visible-bell 1)
-(tool-bar-mode -1)
-(set-fringe-mode 10)
-(setq inhibit-startup-screen t)
+;; (use-package sqlplus ;; test this
+;;   :ensure nil)
 
 (use-package which-key
   :init
@@ -74,9 +69,12 @@
   (setq ivy-initial-inputs-alist nil))
 
 ;; org mode
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-(setq org-log-done 'time)
-(setq org-ellipsis " ▾")
+(use-package org
+  :hook
+  (org-mode . org-bullets-mode)
+  :custom
+  (org-log-done 'time)
+  (org-ellipsis " ▾"))
 
 ;; projectile settings
 (require 'subr-x) ;; necessary because of this issue: https://github.com/bbatsov/projectile/issues/1382
@@ -106,34 +104,29 @@
 
 ;; auto complete
 (ac-config-default)
-;; TODO diminish the mode from mode line
+;; TODO diminish the mode from mode line, or change to a different auto complete via lsp
 
 ;; startup commands:
-(find-file "~/src/emacsConfigs/.emacs.d/init.el")
+(find-file (concat user-emacs-directory "init.el"))
 
 (if (string-equal system-name "ICDT-MBPIH.local")
     (find-file "~/OneDrive - ICD Tech/Notes/DatabaseScripts.org")
-)
+  )
 (if (string-equal system-name "ICDT-MBPIH.local")
     (find-file "~/OneDrive - ICD Tech/Notes/GeneralNotes.org")
-)
+  )
 (if (string-equal system-name "ICDT-WKIH")
     (find-file "~/OneDrive/Notes/DatabaseScripts.org")
-)
+  )
 (if (string-equal system-name "ICDT-WKIH")
     (find-file "~/OneDrive/Notes/GeneralNotes.org")
-)
-(split-window-right)
+  )
 
 ;; revert(reload) buffers when the underlying file has changed
 (global-auto-revert-mode 1)
 
 ;; revert dired and other buffers
 (setq global-auto-revert-non-file-buffers t)
-
-;; (global-display-line-numbers-mode)
-
-;; (set-keyboard-coding-system nil)
 
 ;; If linux or mac, prepare exec-path package
 (when (memq window-system '(mac ns x))
@@ -157,12 +150,12 @@
 
 ;; sqlplus stuff
 (defun sqlplus-x-connect (db user pwd)
- "Build a connection string and make a connection. The point must be in an org-mode table.
+  "Build a connection string and make a connection. The point must be in an org-mode table.
 Columns of the table must correspond to the `sqlplus-x-columns’ variable."
- (interactive)
+  (interactive)
 
- (sqlplus
-  (format
-   "%s/%s@%s"
-   user pwd db) (concat db ".sqp"))
- )
+  (sqlplus
+   (format
+    "%s/%s@%s"
+    user pwd db) (concat db ".sqp"))
+  )
