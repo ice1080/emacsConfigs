@@ -109,10 +109,33 @@
   ;; use eslint with web-mode for jsx files
   (flycheck-add-mode 'javascript-eslint 'web-mode))
 
-(use-package auto-complete
-  :diminish auto-complete-mode
+;; to add javascript lsp to a new computer, run `npm i -g typescript-language-server; npm i -g typescript`
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (web-mode . lsp-deferred)
   :config
-  (ac-config-default))
+  (lsp-enable-which-key-integration t)
+  :custom
+  (lsp-auto-guess-root t))
+
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-position 'bottom)) ;; this doesn't seem to be working right.
+
+(use-package company
+  :diminish company-mode
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :bind (:map company-active-map
+              ("<tab>" . company-complete-selection))
+  (:map lsp-mode-map
+        ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
 
 ;; (use-package doom-themes
 ;;   :config
