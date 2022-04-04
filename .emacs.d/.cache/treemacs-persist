@@ -1,0 +1,5 @@
+* Default
+** emacsConfigs
+ - path :: ~/src/emacsConfigs
+** undebate-ssp
+ - path :: ~/src/undebate-ssp

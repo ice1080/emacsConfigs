@@ -18,7 +18,9 @@
 
 (setq-default indent-tabs-mode nil
               tab-width 4
-	          display-line-numbers t)
+	          display-line-numbers t
+              use-short-answers t ; Replace yes/no prompts with y/n
+              )
 
 (global-auto-revert-mode 1) ;; revert(reload) buffers when the underlying file has changed
 
@@ -88,9 +90,6 @@
   (projectile-project-search-path '("~/src"))
   (projectile-completion-system 'ivy))
 
-(use-package neotree
-  :bind ([f8] . neotree-toggle))
-
 (use-package web-mode
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
@@ -123,7 +122,18 @@
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :custom
-  (lsp-ui-doc-position 'bottom)) ;; this doesn't seem to be working right.
+  (setq lsp-ui-doc-position 'bottom)) ;; this doesn't seem to be working right.
+
+(use-package treemacs
+  :bind ([f8] . treemacs))
+
+(use-package treemacs-projectile
+  :after (treemacs projectile))
+
+(use-package lsp-treemacs
+  :after (treemacs lsp))
+
+(use-package lsp-ivy)
 
 (use-package company
   :diminish company-mode
@@ -142,6 +152,28 @@
 ;;   (load-theme doom-gruvbox))
 ;;   (load-theme doom-peacock))
 
+;; If linux or mac, prepare exec-path package
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
+(use-package sqlplus
+  :ensure nil
+  :config
+  (defun sqlplus-x-connect (db user pwd)
+  "Build a connection string and make a connection. The point must be in an org-mode table.
+Columns of the table must correspond to the `sqlplus-x-columns’ variable."
+  (interactive)
+
+  (sqlplus
+   (format
+    "%s/%s@%s"
+    user pwd db) (concat db ".sqp"))
+  ))
+
+(dolist (mode '(treemacs-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+
 ;; startup commands:
 (find-file (concat user-emacs-directory "init.el"))
 
@@ -159,22 +191,4 @@
         (exec-path-from-shell-copy-env "TNS_ADMIN"))
     )
   )
-
-;; If linux or mac, prepare exec-path package
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-
-(use-package sqlplus ;; test this
-  :ensure nil
-  :config
-  (defun sqlplus-x-connect (db user pwd)
-  "Build a connection string and make a connection. The point must be in an org-mode table.
-Columns of the table must correspond to the `sqlplus-x-columns’ variable."
-  (interactive)
-
-  (sqlplus
-   (format
-    "%s/%s@%s"
-    user pwd db) (concat db ".sqp"))
-  ))
 
