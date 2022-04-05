@@ -29,7 +29,7 @@
 
 (column-number-mode)
 (tool-bar-mode -1)
-(set-fringe-mode 10)
+(set-fringe-mode 12)
 
 ;; location of variables used by Custom
 (load custom-file)
@@ -62,11 +62,13 @@
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
+         ("M-y" . counsel-yank-pop)
          ("C-x b" . counsel-ibuffer)
          ("C-x C-f" . counsel-find-file)
          ("C-x C-b" . counsel-switch-buffer)
          :map minibuffer-local-map
-         ("C-r" . 'counsel-minibuffer-history))
+         ("C-r" . 'counsel-minibuffer-history)
+         ("M-y" . ivy-next-line))
   :config
   (setq ivy-initial-inputs-alist nil))
 
@@ -108,12 +110,18 @@
   ;; use eslint with web-mode for jsx files
   (flycheck-add-mode 'javascript-eslint 'web-mode))
 
+(use-package diff-hl
+  :init (global-diff-hl-mode)
+  :config
+  (diff-hl-show-hunk-mouse-mode)) ;; may have to change to global
+
 ;; to add javascript lsp to a new computer, run `npm i -g typescript-language-server; npm i -g typescript`
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :hook (web-mode . lsp-deferred)
+  :hook ((web-mode . lsp-deferred)
+         (groovy-mode . lsp-deferred))
   :config
   (lsp-enable-which-key-integration t)
   :custom
