@@ -115,6 +115,9 @@
   :config
   (diff-hl-show-hunk-mouse-mode)) ;; may have to change to global
 
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
+
 ;; to add javascript lsp to a new computer, run `npm i -g typescript-language-server; npm i -g typescript`
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
