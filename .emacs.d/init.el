@@ -118,6 +118,8 @@
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
+(use-package json-mode)
+
 ;; to add javascript lsp to a new computer, run `npm i -g typescript-language-server; npm i -g typescript`
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
