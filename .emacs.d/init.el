@@ -160,6 +160,27 @@
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
 
+(use-package dired
+  :ensure nil
+  :bind (([remap dired-mouse-find-file-other-window] . dired-single-buffer-mouse)
+         ("C-x C-j" . dired-single-magic-buffer))
+  :custom ((dired-listing-switches "-alh --group-directories-first"))
+  :config
+  (with-eval-after-load 'dired
+    (bind-keys
+     :map dired-mode-map
+     ("<return>" . dired-single-buffer)
+     ("<backspace>" . dired-single-up-directory)
+     ("^" . dired-single-up-directory))))
+
+(use-package dired-single)
+
+(use-package treemacs-icons-dired
+  :hook (dired-mode . treemacs-icons-dired-enable-once))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 ;; (use-package doom-themes
 ;;   :config
 ;;   (load-theme doom-gruvbox))
