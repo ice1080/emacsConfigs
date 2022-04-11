@@ -12,14 +12,15 @@
  custom-file (concat user-emacs-directory "custom.el")
  confirm-kill-emacs 'y-or-n-p
  visible-bell t
- use-package-always-ensure t ;; todo this needs testing
+ use-package-always-ensure t
+ use-package-verbose t
  inhibit-startup-screen t
  global-auto-revert-non-file-buffers t)
 
 (setq-default indent-tabs-mode nil
               tab-width 4
 	          display-line-numbers t
-              use-short-answers t ; Replace yes/no prompts with y/n
+              use-short-answers t ; Replace yes/no prompts with y/n (is this working?)
               )
 
 (global-auto-revert-mode 1) ;; revert(reload) buffers when the underlying file has changed
@@ -40,10 +41,20 @@
 ;; location of personal elisp lib dir, for downloaded lisp files
 (add-to-list 'load-path "~/src/emacsConfigs/lisp")
 
+(defun ice/display-startup-time ()
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                    (time-subtract after-init-time before-init-time)))
+           gcs-done))
+
+(add-hook 'emacs-startup-hook #'ice/display-startup-time)
+
 (use-package diminish)
 
 (use-package which-key
-  :init
+  :defer 0
+  :config
   (setq which-key-idle-delay 0.3)
   (which-key-mode)
   :diminish which-key-mode)
@@ -58,6 +69,7 @@
 (use-package ivy-rich
   :init
   (ivy-rich-mode 1)
+  :after (ivy)
   :diminish ivy-rich-mode)
 
 (use-package counsel
@@ -92,9 +104,14 @@
   (projectile-project-search-path '("~/src"))
   (projectile-completion-system 'ivy))
 
+(use-package counsel-projectile
+  :after projectile
+  :config (counsel-projectile-mode))
+
 (use-package web-mode
-  :init
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+  :mode "\\.js\\'"
+  ;; :init
+  ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
   :custom
   (js-indent-level 4)
   (web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
@@ -118,7 +135,8 @@
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
-(use-package json-mode)
+(use-package json-mode
+  :defer t)
 
 ;; to add javascript lsp to a new computer, run `npm i -g typescript-language-server; npm i -g typescript`
 (use-package lsp-mode
@@ -146,7 +164,8 @@
 (use-package lsp-treemacs
   :after (treemacs lsp))
 
-(use-package lsp-ivy)
+(use-package lsp-ivy
+  :after lsp)
 
 (use-package company
   :diminish company-mode
@@ -162,6 +181,7 @@
 
 (use-package dired
   :ensure nil
+  :defer t
   :bind (([remap dired-mouse-find-file-other-window] . dired-single-buffer-mouse)
          ("C-x C-j" . dired-single-magic-buffer))
   :custom ((dired-listing-switches "-alh --group-directories-first"))
@@ -173,7 +193,9 @@
      ("<backspace>" . dired-single-up-directory)
      ("^" . dired-single-up-directory))))
 
-(use-package dired-single)
+(use-package dired-single
+  :defer t
+  :after dired)
 
 (use-package treemacs-icons-dired
   :hook (dired-mode . treemacs-icons-dired-enable-once))
