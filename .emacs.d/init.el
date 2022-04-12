@@ -15,7 +15,8 @@
  use-package-always-ensure t
  use-package-verbose t
  inhibit-startup-screen t
- global-auto-revert-non-file-buffers t)
+ global-auto-revert-non-file-buffers t
+ org-blank-before-new-entry '((heading . auto) (plain-list-item . nil)))
 
 (setq-default indent-tabs-mode nil
               tab-width 4
@@ -110,8 +111,6 @@
 
 (use-package web-mode
   :mode "\\.js\\'"
-  ;; :init
-  ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
   :custom
   (js-indent-level 4)
   (web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
@@ -125,7 +124,8 @@
   :init (global-flycheck-mode)
   :config
   ;; use eslint with web-mode for jsx files
-  (flycheck-add-mode 'javascript-eslint 'web-mode))
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (setq-default flycheck-indication-mode 'right-fringe))
 
 (use-package diff-hl
   :init (global-diff-hl-mode)
@@ -182,7 +182,8 @@
 (use-package dired
   :ensure nil
   :defer t
-  :bind (([remap dired-mouse-find-file-other-window] . dired-single-buffer-mouse)
+  :bind (([remap dired] . dired-single)
+         ([remap dired-mouse-find-file-other-window] . dired-single-buffer-mouse)
          ("C-x C-j" . dired-single-magic-buffer))
   :custom ((dired-listing-switches "-alh --group-directories-first"))
   :config
