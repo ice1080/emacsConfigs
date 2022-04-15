@@ -208,6 +208,13 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package multi-vterm
+  :bind (([f6] . multi-vterm)
+         ([f7] . multi-vterm-next)
+         :map vterm-mode-map
+         ([f6] . multi-vterm)
+         ([f7] . multi-vterm-next)))
+
 ;; (use-package doom-themes
 ;;   :config
 ;;   (load-theme doom-gruvbox))
