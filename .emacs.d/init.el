@@ -128,8 +128,12 @@
   (setq-default flycheck-indication-mode 'right-fringe))
 
 (use-package diff-hl
-  :init (global-diff-hl-mode)
+  :after magit
+  :hook ((magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
+         (magit-post-refresh-hook . diff-hl-magit-post-refresh)
+         (dired-mode-hoook . diff-hl-dired-mode))
   :config
+  (global-diff-hl-mode)
   (diff-hl-show-hunk-mouse-mode)) ;; may have to change to global
 
 (use-package expand-region
