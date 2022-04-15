@@ -129,12 +129,12 @@
 
 (use-package diff-hl
   :demand
-  :hook ((magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
-         (magit-post-refresh-hook . diff-hl-magit-post-refresh)
-         (dired-mode-hoook . diff-hl-dired-mode))
+  :hook (dired-mode-hoook . diff-hl-dired-mode)
   :config
   (global-diff-hl-mode)
-  (global-diff-hl-show-hunk-mouse-mode))
+  (global-diff-hl-show-hunk-mouse-mode)
+  (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
