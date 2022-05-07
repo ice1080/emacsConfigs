@@ -16,7 +16,8 @@
  use-package-verbose t
  inhibit-startup-screen t
  global-auto-revert-non-file-buffers t
- org-blank-before-new-entry '((heading . auto) (plain-list-item . nil)))
+ org-blank-before-new-entry '((heading . auto) (plain-list-item . nil))
+ )
 
 (setq-default indent-tabs-mode nil
               tab-width 4
@@ -24,6 +25,7 @@
               use-short-answers t ; Replace yes/no prompts with y/n (is this working?)
               )
 
+(global-tab-line-mode 1)
 (global-auto-revert-mode 1) ;; revert(reload) buffers when the underlying file has changed
 
 (put 'upcase-region 'disabled nil)
@@ -52,6 +54,9 @@
 (add-hook 'emacs-startup-hook #'ice/display-startup-time)
 
 (use-package diminish)
+
+;; use package diminish causes this function to revert, so have to set this value after for now
+(setq tab-line-tabs-function #'tab-line-tabs-mode-buffers)
 
 (use-package which-key
   :defer 0
@@ -202,8 +207,12 @@
   :defer t
   :after dired)
 
-(use-package treemacs-icons-dired
-  :hook (dired-mode . treemacs-icons-dired-enable-once))
+;; for a new machine - M-x all-the-icons-install-fonts
+(use-package all-the-icons)
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode)
+  :config (setq all-the-icons-dired-monochrome nil))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
