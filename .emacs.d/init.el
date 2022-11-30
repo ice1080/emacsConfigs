@@ -120,6 +120,7 @@
   (js-indent-level 4)
   (web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
+;; you might have to install prettier globally with `npm i -g prettier`
 (use-package prettier
   :init
   (add-hook 'after-init-hook 'global-prettier-mode))
