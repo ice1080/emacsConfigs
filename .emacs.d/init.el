@@ -121,6 +121,7 @@
   (web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'"))))
 
 ;; you might have to install prettier globally with `npm i -g prettier`
+;; todo consider changing this to only for web modes? prettier changes the default tab width to 2 incorrectly
 (use-package prettier
   :init
   (add-hook 'after-init-hook 'global-prettier-mode))
@@ -149,12 +150,15 @@
   :defer t)
 
 ;; to add javascript lsp to a new computer, run `npm i -g typescript-language-server; npm i -g typescript`
+;; to add python lsp to a new computer, run `pip install 'python-lsp-server[all]'`
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((web-mode . lsp-deferred)
-         (groovy-mode . lsp-deferred))
+         (groovy-mode . lsp-deferred)
+         (python-mode . lsp-deferred)
+         )
   :config
   (lsp-enable-which-key-integration t)
   :custom
