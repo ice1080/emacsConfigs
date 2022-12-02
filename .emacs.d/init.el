@@ -161,6 +161,7 @@
          )
   :config
   (lsp-enable-which-key-integration t)
+  (setq lsp-pylsp-plugins-pydocstyle-enabled nil)
   :custom
   (lsp-auto-guess-root t))
 
