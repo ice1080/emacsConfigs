@@ -3,6 +3,10 @@ ac-comphist.dat
 auto-save-list/
 projectile-bookmarks.eld
 projectile.cache
+
 .emacs.d/session*
+.emacs.d/url
+.emacs.d/.cache/lsp
+
 *~
 .idea/

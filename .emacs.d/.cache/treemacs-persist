@@ -3,3 +3,5 @@
  - path :: ~/src/emacsConfigs
 ** undebate-ssp
  - path :: ~/src/undebate-ssp
+** undebate
+ - path :: ~/src/undebate

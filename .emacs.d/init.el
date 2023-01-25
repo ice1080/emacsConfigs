@@ -226,9 +226,11 @@
 (use-package multi-vterm
   :bind (([f6] . multi-vterm)
          ([f7] . multi-vterm-next)
+         ([S-f7] . multi-vterm-prev)
          :map vterm-mode-map
          ([f6] . multi-vterm)
-         ([f7] . multi-vterm-next)))
+         ([f7] . multi-vterm-next)
+         ([S-f7] . multi-vterm-prev)))
 
 ;; (use-package doom-themes
 ;;   :config
