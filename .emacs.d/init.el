@@ -262,12 +262,13 @@ Columns of the table must correspond to the `sqlplus-x-columns’ variable."
 ;; startup commands:
 (find-file (concat user-emacs-directory "init.el"))
 
-(if (string-equal (system-name) "ICDT-MBPIH.local")
+(if (string-prefix-p "ICDT-MBPIH" (system-name))
     (progn
       (find-file "~/OneDrive - ICD Tech/Notes/DatabaseScripts.org")
       (find-file "~/OneDrive - ICD Tech/Notes/GeneralNotes.org")
       (exec-path-from-shell-copy-env "DYLD_LIBRARY_PATH")
-      (exec-path-from-shell-copy-env "TNS_ADMIN"))
+      (exec-path-from-shell-copy-env "TNS_ADMIN")
+      )
   (if (string-equal (system-name) "ICDT-WKIH")
       (progn
         (find-file "~/OneDrive/Notes/DatabaseScripts.org")
