@@ -1,7 +1,5 @@
 * Default
 ** emacsConfigs
  - path :: ~/src/emacsConfigs
-** undebate-ssp
- - path :: ~/src/undebate-ssp
-** undebate
- - path :: ~/src/undebate
+** spotify-releases
+ - path :: ~/src/spotify-releases

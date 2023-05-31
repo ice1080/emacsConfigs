@@ -277,3 +277,15 @@ Columns of the table must correspond to the `sqlplus-x-columns’ variable."
     )
   )
 
+(add-hook 'post-command-hook 'set-buffer-bg-color)
+
+(add-hook 'change-major-mode-hook 'set-buffer-bg-color)
+
+(add-hook 'window-configuration-change-hook 'set-buffer-bg-color)
+
+(defun set-buffer-bg-color ()
+  (interactive)
+  (cond
+    ((eq major-mode 'vterm-mode)
+     (setq buffer-face-mode-face `(:background "black"))
+     (buffer-face-mode 1))))
