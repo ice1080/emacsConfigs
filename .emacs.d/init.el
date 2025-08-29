@@ -241,42 +241,12 @@
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
-(use-package sqlplus
-  :ensure nil
-  :config
-  (defun sqlplus-x-connect (db user pwd)
-  "Build a connection string and make a connection. The point must be in an org-mode table.
-Columns of the table must correspond to the `sqlplus-x-columns’ variable."
-  (interactive)
-
-  (sqlplus
-   (format
-    "%s/%s@%s"
-    user pwd db) (concat db ".sqp"))
-  ))
-
 (dolist (mode '(treemacs-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 
 ;; startup commands:
 (find-file (concat user-emacs-directory "init.el"))
-
-(if (string-prefix-p "ICDT-MBPIH" (system-name))
-    (progn
-      (find-file "~/OneDrive - ICD Tech/Notes/DatabaseScripts.org")
-      (find-file "~/OneDrive - ICD Tech/Notes/GeneralNotes.org")
-      (exec-path-from-shell-copy-env "DYLD_LIBRARY_PATH")
-      (exec-path-from-shell-copy-env "TNS_ADMIN")
-      )
-  (if (string-equal (system-name) "ICDT-WKIH")
-      (progn
-        (find-file "~/OneDrive/Notes/DatabaseScripts.org")
-        (find-file "~/OneDrive/Notes/GeneralNotes.org")
-        (exec-path-from-shell-copy-env "LD_LIBRARY_PATH")
-        (exec-path-from-shell-copy-env "TNS_ADMIN"))
-    )
-  )
 
 (add-hook 'post-command-hook 'set-buffer-bg-color)
 
